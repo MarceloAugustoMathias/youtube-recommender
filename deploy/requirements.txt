@@ -1,0 +1,11 @@
+gunicorn
+Flask
+requests
+pandas
+joblib
+numpy
+scipy
+scikit-learn
+lightgbm
+youtube-dl
+datetime

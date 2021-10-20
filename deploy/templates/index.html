@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <header class="header">
+    <a href="#">
+      <img src="{{url_for('static', filename='logo.png')}}" alt="YouTube Logo" class="youtube-logo" />
+    </a>
+    <form action="/predict" method="get" class="search-bar">
+      <input id="id" name="id" class="search-input" type="search" placeholder="Busca" aria-label="Busca" />
+      <button type="submit" class="search-btn">
+        <img src="{{url_for('static', filename='magnify.svg')}}" />
+      </button>
+    </form>
+    <div class="menu-icons">
+      <a href="#" class="hide-mobile">
+        <img src="{{url_for('static', filename='video-plus.svg')}}" alt="Upload Video" />
+      </a>
+      <a href="#" class="show-mobile">
+        <img src="{{url_for('static', filename='apps.svg')}}" alt="Apps" />
+      </a>
+      <a href="#" class="hide-mobile">
+        <img src="{{url_for('static', filename='bell.svg')}}" alt="Notifications" />
+      </a>
+      <a href="#">
+        <img class="menu-channel-icon" src="https://media-exp1.licdn.com/dms/image/C4D03AQFxzcI9LHVmDQ/profile-displayphoto-shrink_100_100/0/1568650742489?e=1640217600&v=beta&t=aGWFr6vibZO6JzZkDymhW_-zWV22e-XjXv8m_SNHOdI
+" alt="Your Channel" />
+      </a>
+    </div>
+  </header>
+  <div class="videos">
+    <section class="video-section">
+      <h2 class="video-section-title">
+        Recomendador de vídeos sobre Data Science
+      </h2>
+
+      {%for i in range(0, len)%}
+
+      <article class="video-container">
+        <a href="{{predictions[i][0]}}" class="thumbnail" data-duration="{{predictions[i][5]}}">
+          <img class="thumbnail-image" src="{{predictions[i][8]}}" />
+        </a>
+        <div class="video-bottom-section">
+          <a href="{{predictions[i][4]}}">
+            <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+          </a>
+          <div class="video-details">
+            <a href="{{predictions[i][0]}}" class="video-title">{{predictions[i][1]}}</a>
+            <a href="{{predictions[i][4]}}" class="video-channel-name">{{predictions[i][3]}}</a>
+            <div class="video-metadata">
+              <span>{{predictions[i][6]}} views</span>
+              •
+              <span>{{predictions[i][7]}} Likes</span>
+            </div>
+            <div class="video-metadata">
+              <span class="score-label">Score: {{"{:.0%}".format(predictions[i][2])}}</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {%endfor%}
+
+    </section>
+  </div>
+</body>
+</html>
